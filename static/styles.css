@@ -1,0 +1,75 @@
+body {
+    background-color: #f8f9fa;
+    color: #343a40;
+    overflow-x: hidden;
+}
+.navbar-brand {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 2.5rem;
+    animation: fadeInDown 1s;
+}
+.table-hover tbody tr:hover {
+    background-color: #e9ecef;
+}
+.btn-outline {
+    border-width: 2px;
+    transition: transform 0.3s ease;
+}
+.btn-outline:hover {
+    transform: scale(1.1);
+}
+.table-dark th, .table-dark td, .table-dark thead th {
+    border-color: #6c757d;
+}
+.custom-footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    animation: fadeInUp 1s;
+}
+.hero-section {
+    background: url('https://via.placeholder.com/1500x500') no-repeat center center;
+    background-size: cover;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 2px 2px 4px #000;
+    animation: zoomIn 1s;
+}
+.hero-text {
+    font-size: 3rem;
+    font-weight: bold;
+}
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
