@@ -21,21 +21,21 @@ body {
 .table-dark th, .table-dark td, .table-dark thead th {
     border-color: #6c757d;
 }
-.custom-footer {
+/* .custom-footer {
     background-color: #343a40;
     color: white;
     padding: 20px;
     text-align: center;
     animation: fadeInUp 1s;
-}
+} */
 .hero-section {
-    background: url('https://via.placeholder.com/1500x500') no-repeat center center;
+    background: no-repeat center center;
     background-size: cover;
-    height: 300px;
+    height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: #1f4366;
     text-shadow: 2px 2px 4px #000;
     animation: zoomIn 1s;
 }
