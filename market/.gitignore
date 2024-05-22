@@ -91,3 +91,5 @@ celerybeat-schedule
 
 # Pyre type checker
 .pyre/
+
+ Pipfile.lock
