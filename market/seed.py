@@ -5,6 +5,10 @@ with app.app_context():
     # Create the database and the db table
     db.create_all()
 
+    # Clear existing records
+    db.session.query(Item).delete()
+    db.session.commit()
+
     # Insert seed data
     items = [
         Item(name='Laptop', price=999, barcode='123456789012', description='A high-performance laptop.'),
