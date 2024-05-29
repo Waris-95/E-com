@@ -1,7 +1,8 @@
 from market import app
-from flask import render_template, jsonify
-from market.models import Item
+from flask import render_template, jsonify, redirect, url_for, flash
+from market.models import Item, User
 from market.forms import RegisterForm
+from market import db
 
 @app.route('/')
 @app.route('/home')
@@ -20,7 +21,20 @@ def get_items():
     items_list = [{'name': item.name, 'price': item.price, 'barcode': item.barcode, 'description': item.description} for item in items]
     return jsonify(items_list)
 
-@app.route('/register')
+# route for signup
+@app.route('/register', methods=['POST', 'GET'])
 def register_page():
     form = RegisterForm()
+    if form.validate_on_submit():
+        user_to_create = User(username=form.username.data,
+                              email_address=form.email_address.data,
+                              password_hash=form.password1.data)
+        db.session.add(user_to_create)
+        db.session.commit()
+        return redirect(url_for('shop_page'))
+    
+    if form.errors != {}: # if no errors from the validations
+        for err_msg in form.errors.values():
+            flash(f'There was an error with creating a user: {err_msg}', category='danger')
+    
     return render_template('register.html', form=form)
