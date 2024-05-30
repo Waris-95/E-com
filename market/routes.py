@@ -1,8 +1,7 @@
-from market import app
+from market import db, app
 from flask import render_template, jsonify, redirect, url_for, flash
 from market.models import Item, User
-from market.forms import RegisterForm
-from market import db
+from market.forms import RegisterForm, LoginForm
 
 @app.route('/')
 @app.route('/home')
@@ -14,14 +13,14 @@ def shop_page():
     items = Item.query.all()
     return render_template('market.html', items=items)
 
-# route to display items
+# Route to display items
 @app.route('/items', methods=['GET'])
 def get_items():
     items = Item.query.all()
     items_list = [{'name': item.name, 'price': item.price, 'barcode': item.barcode, 'description': item.description} for item in items]
     return jsonify(items_list)
 
-# route for signup
+# Route for signup
 @app.route('/register', methods=['POST', 'GET'])
 def register_page():
     form = RegisterForm()
@@ -33,7 +32,23 @@ def register_page():
         db.session.commit()
         flash('Account created successfully!', 'success')
         return redirect(url_for('shop_page'))
-    if form.errors != {}:  # if there are errors from the validations
+    if form.errors != {}:  # If there are errors from the validations
         for err_msg in form.errors.values():
             flash(f'There was an error with creating a user: {err_msg}', 'danger')
     return render_template('register.html', form=form)
+
+# Route for login
+@app.route('/login', methods=['POST', 'GET'])
+def login_page():
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        user = User.query.filter_by(username=username).first()
+        if user:
+            # Handle successful login
+            flash('Login successful!', 'success')
+            return redirect(url_for('home_page'))
+        else:
+            # Handle login failure
+            flash('Username not found. Please try again.', 'danger')
+    return render_template('login.html', form=form)
