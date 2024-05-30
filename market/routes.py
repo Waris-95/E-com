@@ -31,10 +31,9 @@ def register_page():
                               password_hash=form.password1.data)
         db.session.add(user_to_create)
         db.session.commit()
+        flash('Account created successfully!', 'success')
         return redirect(url_for('shop_page'))
-    
-    if form.errors != {}: # if no errors from the validations
+    if form.errors != {}:  # if there are errors from the validations
         for err_msg in form.errors.values():
-            flash(f'There was an error with creating a user: {err_msg}', category='danger')
-    
+            flash(f'There was an error with creating a user: {err_msg}', 'danger')
     return render_template('register.html', form=form)
