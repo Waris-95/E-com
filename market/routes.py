@@ -1,7 +1,7 @@
 from market import db, app
 from flask import render_template, jsonify, redirect, url_for, flash
 from market.models import Item, User
-from market.forms import RegisterForm, LoginForm
+from market.forms import RegisterForm
 
 @app.route('/')
 @app.route('/home')
@@ -27,7 +27,7 @@ def register_page():
     if form.validate_on_submit():
         user_to_create = User(username=form.username.data,
                               email_address=form.email_address.data,
-                              password_hash=form.password1.data)
+                              password=form.password1.data)
         db.session.add(user_to_create)
         db.session.commit()
         flash('Account created successfully!', 'success')
@@ -36,19 +36,3 @@ def register_page():
         for err_msg in form.errors.values():
             flash(f'There was an error with creating a user: {err_msg}', 'danger')
     return render_template('register.html', form=form)
-
-# Route for login
-@app.route('/login', methods=['POST', 'GET'])
-def login_page():
-    form = LoginForm()
-    if form.validate_on_submit():
-        username = form.username.data
-        user = User.query.filter_by(username=username).first()
-        if user:
-            # Handle successful login
-            flash('Login successful!', 'success')
-            return redirect(url_for('home_page'))
-        else:
-            # Handle login failure
-            flash('Username not found. Please try again.', 'danger')
-    return render_template('login.html', form=form)
