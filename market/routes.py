@@ -7,6 +7,7 @@ from flask_login import login_user, login_required, current_user, logout_user
 '''
 ------> Shop ROUTES <------
 '''
+
 @app.route('/')
 @app.route('/home')
 def home_page():
@@ -28,6 +29,7 @@ def get_items():
 '''
 ------> AUTH ROUTES <------
 '''
+
 # Route for signup
 @app.route('/register', methods=['POST', 'GET'])
 def register_page():
