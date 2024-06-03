@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from dotenv import load_dotenv
 import os
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
 load_dotenv()
 
@@ -15,5 +16,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 migrate = Migrate(app, db)
+login_manager = LoginManager(app)
 
-from market import routes
+@login_manager.user_loader
+def load_user(user_id):
+    from market.models import User  # Import here to avoid circular import
+    return User.query.get(int(user_id))
+
+from market import routes  # Import here to avoid circular import
