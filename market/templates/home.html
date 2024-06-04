@@ -1,35 +1,136 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- Hero Section -->
+<div class="jumbotron jumbotron-fluid text-center hero-section">
+  <video autoplay muted loop id="heroVideo" class="video-background">
+    <source src="https://czybnb.s3.us-east-2.amazonaws.com/Motion%20Graphic%20%7C%20Online%20Shopping%20%282D%20animation%29.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="container video-overlay">
+    <h1 class="hero-text">Welcome to Tooli</h1>
+    <p class="lead">Your one-stop shop for all your shopping needs.</p>
+    <a href="{{ url_for('shop_page') }}" class="btn btn-primary btn-lg">Shop Now</a>
+  </div>
+</div>
+
+<!-- Featured Products Section -->
 <div class="container mt-5">
-  <h1 class="display-4 text-center animate__animated animate__fadeInUp">Home Page</h1>
-  <table class="table table-hover table-dark mt-4 animate__animated animate__fadeIn">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Barcode</th>
-        <th scope="col">Price</th>
-        <th scope="col">Options</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Your rows inside the table HERE: -->
-      {% for item in items %}
-        <tr>
-          <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.barcode }}</td>
-          <td>${{ item.price }}</td>
-          <td>
-            <button class="btn btn-outline btn-info animate__animated animate__fadeInLeft"><i class="fas fa-info-circle"></i> More Info</button>
-            <button class="btn btn-outline btn-success animate__animated animate__fadeInRight"><i class="fas fa-shopping-cart"></i> Buy</button>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="row">
+    {% for item in items %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="{{ item.image_url }}" class="card-img-top" alt="{{ item.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">{{ item.description }}</p>
+            <p class="card-text"><strong>${{ item.price }}</strong></p>
+            <a href="#" class="btn btn-info"><i class="fas fa-info-circle"></i> More Info</a>
+            <a href="#" class="btn btn-success"><i class="fas fa-shopping-cart"></i> Buy</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Categories Section -->
+<div class="container mt-5">
+  <h2 class="display-4 text-center animate__animated animate__fadeInUp">Shop by Categories</h2>
+  <div class="row">
+    <div class="col-md-3 mb-4">
+      <div class="card h-100">
+        <img src="https://th.bing.com/th/id/OIP.zKKgUKamKrwUMNPssdMDVAAAAA?rs=1&pid=ImgDetMain" class="card-img-top" alt="Category 1">
+        <div class="card-body text-center">
+          <h5 class="card-title">Category 1</h5>
+          <a href="{{ url_for('shop_page') }}" class="btn btn-primary">Shop Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4">
+      <div class="card h-100">
+        <img src="https://th.bing.com/th/id/OIP.rg0j0rml0Pqf92BHmjL-WQAAAA?rs=1&pid=ImgDetMain" class="card-img-top" alt="Category 2">
+        <div class="card-body text-center">
+          <h5 class="card-title">Category 2</h5>
+          <a href="{{ url_for('shop_page') }}" class="btn btn-primary">Shop Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4">
+      <div class="card h-100">
+        <img src="https://www.slashgear.com/wp-content/uploads/2019/03/razer2235-997x800.jpg" class="card-img-top" alt="Category 3">
+        <div class="card-body text-center">
+          <h5 class="card-title">Category 3</h5>
+          <a href="{{ url_for('shop_page') }}" class="btn btn-primary">Shop Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4">
+      <div class="card h-100">
+        <img src="https://th.bing.com/th/id/R.f39ad74a9bdaabae983e8d36a29b4c63?rik=V%2bqgNOmqMvtYyQ&pid=ImgRaw&r=0" class="card-img-top" alt="Category 4">
+        <div class="card-body text-center">
+          <h5 class="card-title">Category 4</h5>
+          <a href="{{ url_for('shop_page') }}" class="btn btn-primary">Shop Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonials Section -->
+<div class="container mt-5">
+  <h2 class="display-4 text-center animate__animated animate__fadeInUp">What Our Customers Say</h2>
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 text-center shadow-sm border-0 testimonial-card">
+        <div class="card-body">
+          <img src="https://tech4service.ca/wp-content/uploads/2021/08/team2.jpg" class="rounded-circle mb-3" alt="Customer 1">
+          <p class="card-text">"Great products and excellent customer service!"</p>
+          <h5 class="card-title">- ✅Verified Purchase</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 text-center shadow-sm border-0 testimonial-card">
+        <div class="card-body">
+          <img src="https://d2v5dzhdg4zhx3.cloudfront.net/web-assets/images/storypages/short/linkedin-profile-picture-maker/dummy_image/thumb/004.webp" class="rounded-circle mb-3" alt="Customer 2">
+          <p class="card-text">"I found exactly what I needed, and the prices are unbeatable."</p>
+          <h5 class="card-title">- ✅Verified Purchase</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 text-center shadow-sm border-0 testimonial-card">
+        <div class="card-body">
+          <img src="https://hawkinsfamilylaw.co.uk/wp-content/uploads/2019/06/Staff-photo-jo-hawkins.jpg" class="rounded-circle mb-3" alt="Customer 3">
+          <p class="card-text">"Fast shipping and great quality. Highly recommend!"</p>
+          <h5 class="card-title">- ✅Verified Purchase</h5>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
+<!-- Newsletter Signup Section -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card text-center">
+        <div class="card-body">
+          <h2 class="card-title">Stay Updated!</h2>
+          <p class="card-text">Sign up for our newsletter to get the latest updates and special offers.</p>
+          <form>
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Enter your email">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Subscribe</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
