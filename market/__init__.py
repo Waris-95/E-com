@@ -29,3 +29,7 @@ def unauthorized(e):
     return render_template('401.html'), 401
 
 from market import routes  # Import here to avoid circular import
+
+# Register commands
+from market.seed import seed
+app.cli.add_command(seed)
