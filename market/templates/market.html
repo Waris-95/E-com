@@ -5,8 +5,6 @@ Market Page
 {% endblock %}
 
 {% block content %}
-
-{% include 'includes/items_modals.html' %}
 <!-- Header Section -->
 <div class="container mt-5">
   <h1 class="display-4 text-center animate__animated animate__fadeInUp">Shop Page</h1>
@@ -15,13 +13,13 @@ Market Page
 
 <!-- Product Table -->
 <div class="container mt-5">
-  <div>
-    <div class="col-8" style="margin-top:20px; margin-left: 20px">
-      <h2>Available Items</h2>
-      <p>Start buying</p>
+  <div class="row">
+    <div class="col-md-8">
+      <h2 class="animate__animated animate__fadeInUp">Available Items</h2>
+      <p class="animate__animated animate__fadeInUp">Start buying</p>
       
-      <table class="table table-hover table-dark mt-4 animate__animated animate__fadeIn">
-        <thead>
+      <table class="table table-hover table-striped mt-4 animate__animated animate__fadeIn">
+        <thead class="thead-dark">
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
@@ -31,28 +29,26 @@ Market Page
           </tr>
         </thead>
         <tbody>
-          <!-- Your rows inside the table HERE: -->
           {% for item in items %}
-          {% include 'includes/items_modals.html' %}
             <tr>
               <td>{{ item.id }}</td>
               <td>{{ item.name }}</td>
               <td>{{ item.barcode }}</td>
               <td>${{ item.price }}</td>
               <td>
-                <button class="btn btn-outline btn-info animate__animated animate__fadeInLeft" data-toggle="modal" data-target="#Modal-MoreInfo">More Info</button>
-                <button class="btn btn-outline btn-success animate__animated animate__fadeInRight"><i class="fas fa-shopping-cart"></i> Buy</button>
+                <button class="btn btn-info btn-sm animate__animated animate__fadeInLeft" data-toggle="modal" data-target="#Modal-MoreInfo-{{ item.id }}">More Info</button>
+                <button class="btn btn-success btn-sm animate__animated animate__fadeInRight" data-toggle="modal" data-target="#Modal-PurchaseConfirm-{{ item.id }}">Buy</button>
               </td>
             </tr>
+            {% include 'includes/items_modals.html' %}
           {% endfor %}
         </tbody>
       </table>
     </div>
-    <br>
-    <br>
-    <div class="col-4">
-      <h2>Owned Items</h2>
-      <p>Sell the item to put it back on the market</p>
+    <div class="col-md-4">
+      <h2 class="animate__animated animate__fadeInUp">Owned Items</h2>
+      <p class="animate__animated animate__fadeInUp">Sell the item to put it back on the market</p>
+      <!-- You can add your owned items section here -->
     </div>
   </div>
 </div>

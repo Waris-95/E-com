@@ -1,19 +1,27 @@
+/* General Styles */
 body {
     background-color: #ffffff; /* Set background color to white */
     color: #000000; /* Set default text color to black */
     overflow-x: hidden;
 }
 
+/* Navbar Styles */
 .navbar-brand {
     font-family: 'Brush Script MT', cursive;
     font-size: 2.5rem;
     animation: fadeInDown 1s;
 }
 
+/* Table Styles */
 .table-hover tbody tr:hover {
     background-color: #e9ecef;
 }
 
+.table-dark th, .table-dark td, .table-dark thead th {
+    border-color: #6c757d;
+}
+
+/* Button Styles */
 .btn-outline {
     border-width: 2px;
     transition: transform 0.3s ease;
@@ -23,10 +31,7 @@ body {
     transform: scale(1.1);
 }
 
-.table-dark th, .table-dark td, .table-dark thead th {
-    border-color: #6c757d;
-}
-
+/* Hero Section Styles */
 .hero-section {
     position: relative;
     height: 500px; /* Adjust the height as needed */
@@ -67,6 +72,7 @@ body {
     z-index: 1;
 }
 
+/* Card Styles */
 .card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     background-color: #ffffff; /* Set card background to white */
@@ -87,6 +93,7 @@ body {
     font-size: 1rem;
 }
 
+/* Testimonial Styles */
 .rounded-circle {
     border-radius: 50%;
     width: 80px; /* Fixed width */
@@ -99,6 +106,7 @@ body {
     height: 80px; /* Fixed height */
 }
 
+/* Newsletter Styles */
 .newsletter-card {
     background-color: #ffffff; /* Set newsletter card background to white */
     color: #000; /* Set newsletter card text to black */
@@ -112,6 +120,65 @@ body {
     border-radius: 0;
 }
 
+/* 401 Error Page Styles */
+body.unauthorized {
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.container.unauthorized {
+    margin-top: 50px;
+}
+
+.unauthorized h1 {
+    margin-bottom: 20px;
+}
+
+.unauthorized p {
+    margin-bottom: 40px;
+}
+
+.unauthorized .btn-primary {
+    margin-right: 10px;
+}
+
+.unauthorized .btn-secondary {
+    margin-left: 10px;
+}
+
+/* Market Page Styles */
+.market-container {
+    max-width: 1200px;
+}
+
+.display-4 {
+    font-weight: 700;
+}
+
+.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.btn-outline {
+    border-width: 2px;
+    transition: transform 0.3s ease;
+}
+
+.btn-outline:hover {
+    transform: scale(1.1);
+}
+
+.animate__animated.animate__fadeInLeft,
+.animate__animated.animate__fadeInRight {
+    animation-duration: 1s;
+}
+
+/* Animations */
 @keyframes fadeInDown {
     from {
         opacity: 0;
@@ -143,32 +210,4 @@ body {
         opacity: 1;
         transform: scale(1);
     }
-}
-
-
-
-/* 401 style */
-body {
-    background-color: #f8f9fa;
-    color: #343a40;
-}
-
-.container {
-    margin-top: 50px;
-}
-
-h1 {
-    margin-bottom: 20px;
-}
-
-p {
-    margin-bottom: 40px;
-}
-
-.btn-primary {
-    margin-right: 10px;
-}
-
-.btn-secondary {
-    margin-left: 10px;
 }
