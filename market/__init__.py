@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from dotenv import load_dotenv
@@ -22,5 +22,10 @@ login_manager = LoginManager(app)
 def load_user(user_id):
     from market.models import User  # Import here to avoid circular import
     return User.query.get(int(user_id))
+
+# to render a better 401
+@app.errorhandler(401)
+def unauthorized(e):
+    return render_template('401.html'), 401
 
 from market import routes  # Import here to avoid circular import

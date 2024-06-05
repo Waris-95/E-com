@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unauthorized Access</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Include Bootstrap CSS or any other CSS framework you are using -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Include Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Include Lottie -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.5/lottie.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            margin-right: 10px;
+        }
+        .btn-secondary {
+            margin-left: 10px;
+        }
+        .animated-button {
+            display: inline-block;
+            margin: 10px;
+            position: relative;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .animated-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.5s;
+            border-radius: 50%;
+            z-index: 0;
+            transform: translate(-50%, -50%) scale(0);
+        }
+        .animated-button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center animate__animated animate__fadeIn">
+        <div id="animationContainer" style="width: 300px; height: 300px; margin: 0 auto;" class="animate__animated animate__fadeIn"></div>
+        <h1 class="display-4 animate__animated animate__bounceIn">401 - Unauthorized</h1>
+        <p class="lead animate__animated animate__fadeIn">To view the shop you can either login or signup for a new account.</p>
+        <a href="{{ url_for('login_page') }}" class="btn btn-primary animated-button animate__animated animate__pulse animate__infinite">Login</a>
+        <a href="{{ url_for('home_page') }}" class="btn btn-secondary animated-button animate__animated animate__fadeIn">Go to Home</a>
+    </div>
+
+    <script>
+        var animation = lottie.loadAnimation({
+            container: document.getElementById('animationContainer'), // the dom element
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'https://assets2.lottiefiles.com/packages/lf20_sHmbsD.json' // the path to the animation json
+        });
+    </script>
+</body>
+</html>

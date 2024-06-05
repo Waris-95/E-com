@@ -144,3 +144,31 @@ body {
         transform: scale(1);
     }
 }
+
+
+
+/* 401 style */
+body {
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 40px;
+}
+
+.btn-primary {
+    margin-right: 10px;
+}
+
+.btn-secondary {
+    margin-left: 10px;
+}
