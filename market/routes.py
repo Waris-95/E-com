@@ -24,7 +24,9 @@ def shop_page():
             p_item_object.owner = current_user.id
             current_user.budget -= p_item_object.price
             db.session.commit()
-    items = Item.query.all()
+            flash(f"your Order has been placed, an email will be sent upon dispatching {p_item_object.name} ")
+    items = Item.query.filter_by(owner=None)
+    
     return render_template('market.html', items=items, purchase_form=purchase_form)
 
 # Route to display items
