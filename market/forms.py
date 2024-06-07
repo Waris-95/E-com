@@ -3,7 +3,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from market.models import User
 
-
+# Register form class
 class RegisterForm(FlaskForm):
 
     def validate_username(self, username_to_check):
@@ -22,8 +22,14 @@ class RegisterForm(FlaskForm):
         if user:
             raise ValidationError('Email address already in use. Please choose different one')
         
-        
+# Login form class 
 class LoginForm(FlaskForm):
     username = StringField(label="Username:", validators=[DataRequired()])
     password = PasswordField(label="Password:", validators=[DataRequired()])
     submit = SubmitField(label='Login')
+
+# Purchase Item form
+class PurchaseItemForm(FlaskForm):
+    submit = SubmitField(label='Confirm order')
+class SellItemForm(FlaskForm):
+    submit = SubmitField(label='Sell')

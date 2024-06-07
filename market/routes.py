@@ -1,7 +1,7 @@
 from market import db, app
-from flask import render_template, jsonify, redirect, url_for, flash
+from flask import render_template, jsonify, redirect, url_for, flash, request
 from market.models import Item, User
-from market.forms import RegisterForm, LoginForm
+from market.forms import RegisterForm, LoginForm, PurchaseItemForm, SellItemForm
 from flask_login import login_user, login_required, current_user, logout_user
 
 '''
@@ -13,11 +13,19 @@ from flask_login import login_user, login_required, current_user, logout_user
 def home_page():
     return render_template("home.html")
 
-@app.route('/shop')
+@app.route('/shop', methods=['POST', 'GET'])
 @login_required
 def shop_page():
+    purchase_form = PurchaseItemForm()
+    if request.method == 'POST':
+        purchased_item = request.form.get('purchased_item')
+        p_item_object = Item.query.filter_by(name=purchased_item).first()
+        if p_item_object:
+            p_item_object.owner = current_user.id
+            current_user.budget -= p_item_object.price
+            db.session.commit()
     items = Item.query.all()
-    return render_template('market.html', items=items)
+    return render_template('market.html', items=items, purchase_form=purchase_form)
 
 # Route to display items
 @app.route('/items', methods=['GET'])

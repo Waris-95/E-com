@@ -30,7 +30,25 @@
         </div>
         <div class="modal-body">
          <h3>Order Confirmation</h3>
-         <p>Are your sure about purchasing {{ item.name }} for {{ item.price }}$ ?</p>
+         <br>
+         <form method="POST">
+          {{ purchase_form.hidden_tag() }}
+      
+          <div class="text-center mb-3">
+              <p>Are you sure about purchasing <strong>{{ item.name }}</strong> for <strong>${{ item.price }}</strong>?</p>
+          </div>
+      
+          <div class="text-center mb-4">
+              <p>By clicking "Confirm Order" you will confirm your order for <strong>{{ item.name }}</strong>.</p>
+          </div>
+      
+          <div class="text-center">
+            <input id="purchased_item" name="purchased_item" type="hidden" value="{{ item.name }}">
+              {{ purchase_form.submit(class="btn btn-outline-success") }}
+          </div>
+      </form>
+      
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
