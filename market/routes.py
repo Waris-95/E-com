@@ -25,7 +25,7 @@ def shop_page():
                 p_item_object.buy(current_user)   
                 flash(f"Your order has been placed. An email will be sent when your order has been shipped.", category='success')
             else:
-                flash(f"Unfortunately, you don't have enough budget for {p_item_object.name}$", category='danger')
+                flash(f"Unfortunately, you don't have enough budget for {p_item_object.name}", category='danger')
         # After handling POST request, redirect to GET to show updated item list
         return redirect(url_for('shop_page'))
     
@@ -44,6 +44,18 @@ def get_items():
     return jsonify(items_list)
 
 # route to sell items
+@app.route('/sell_item/<int:item_id>', methods=['POST'])
+@login_required
+def sell_item(item_id):
+    item = Item.query.get(item_id)
+    if item and item.owner == current_user.id:
+        current_user.budget += item.price
+        item.owner = None  # Remove ownership
+        db.session.commit()
+        flash(f'Successfully sold {item.name} for ${item.price}!', 'success')
+    else:
+        flash('Item not found or you do not own this item.', 'danger')
+    return redirect(url_for('shop_page'))
 
 
 '''
