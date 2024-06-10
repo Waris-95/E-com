@@ -1,8 +1,10 @@
-from market import db, app
+from market import db, app, mail
 from flask import render_template, jsonify, redirect, url_for, flash, request
 from market.models import Item, User
 from market.forms import RegisterForm, LoginForm, PurchaseItemForm, SellItemForm
 from flask_login import login_user, login_required, current_user, logout_user
+from flask_mail import Message
+
 
 '''
 ------> Shop ROUTES <------
@@ -34,7 +36,6 @@ def shop_page():
         owned_items = Item.query.filter_by(owner=current_user.id).all()
         print(f"Owned Items: {owned_items}") 
         return render_template('market.html', items=items, purchase_form=purchase_form, owned_items=owned_items)
-
 
 # Route to display items
 @app.route('/items', methods=['GET'])
@@ -100,4 +101,23 @@ def login_page():
 def logout_page():
     logout_user()
     flash('You have been logged out!', category='info')
+    return redirect(url_for('home_page'))
+
+"""
+------> MAILING SYSTEM ROUTES <------
+"""
+@app.route('/subscribe', methods=['POST'])
+def subscribe():
+    email = request.form.get('email')
+    if email:
+        msg = Message("Thank you for subscribing!", recipients=[email])
+        msg.body = "You have successfully subscribed to our newsletter. Stay tuned for updates and special offers!"
+        try:
+            mail.send(msg)
+            flash('Subscription successful! A confirmation email has been sent.', 'success')
+        except Exception as e:
+            flash('Failed to send email. Please try again later.', 'danger')
+            print(e)
+    else:
+        flash('Please enter a valid email address.', 'danger')
     return redirect(url_for('home_page'))
