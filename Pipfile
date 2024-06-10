@@ -10,6 +10,8 @@ flask-wtf = "*"
 wtforms = "*"
 flask-bcrypt = "*"
 flask-login = "*"
+flask_mail = "*"
+gunicorn = "*"
 
 [dev-packages]
 
