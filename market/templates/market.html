@@ -48,7 +48,43 @@ Market Page
     <div class="col-md-4">
       <h2 class="animate__animated animate__fadeInUp">Owned Items</h2>
       <p class="animate__animated animate__fadeInUp">Sell the item to put it back on the market</p>
-      <!-- You can add your owned items section here -->
+      <div class="row">
+        {% for owned_item in owned_items %}
+          <div class="col-md-6">
+            <div style="margin-bottom: 5px" class="card text-center bg-dark">
+              <div class="card-body">
+                <h5 class="card-title">{{ owned_item.name }}</h5>
+                <button type="button" class="btn btn-outline-danger" style="margin-bottom: 10px;" data-toggle="modal" data-target="#Modal-SellConfirm-{{ owned_item.id }}">
+                  Sell this Item
+                </button>
+                <p class="card-text"><strong>{{ owned_item.additional_text }}</strong></p>
+              </div>
+            </div>
+          </div>
+          <!-- Sell Confirmation Modal -->
+          <div class="modal fade" id="Modal-SellConfirm-{{ owned_item.id }}" tabindex="-1" role="dialog" aria-labelledby="Modal-SellConfirm-{{ owned_item.id }}Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="Modal-SellConfirm-{{ owned_item.id }}Label">Confirm Sell</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to sell "{{ owned_item.name }}"?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <form action="{{ url_for('sell_item', item_id=owned_item.id) }}" method="POST">
+                    <button type="submit" class="btn btn-danger">Sell</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>

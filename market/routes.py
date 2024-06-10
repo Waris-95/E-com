@@ -21,13 +21,20 @@ def shop_page():
         purchased_item = request.form.get('purchased_item')
         p_item_object = Item.query.filter_by(name=purchased_item).first()
         if p_item_object:
-            p_item_object.owner = current_user.id
-            current_user.budget -= p_item_object.price
-            db.session.commit()
-            flash(f"your Order has been placed, an email will be sent upon dispatching {p_item_object.name} ")
-    items = Item.query.filter_by(owner=None)
+            if current_user.can_purchase(p_item_object):
+                p_item_object.buy(current_user)   
+                flash(f"Your order has been placed. An email will be sent when your order has been shipped.", category='success')
+            else:
+                flash(f"Unfortunately, you don't have enough budget for {p_item_object.name}$", category='danger')
+        # After handling POST request, redirect to GET to show updated item list
+        return redirect(url_for('shop_page'))
     
-    return render_template('market.html', items=items, purchase_form=purchase_form)
+    elif request.method == 'GET':
+        items = Item.query.filter_by(owner=None).all()
+        owned_items = Item.query.filter_by(owner=current_user.id).all()
+        print(f"Owned Items: {owned_items}") 
+        return render_template('market.html', items=items, purchase_form=purchase_form, owned_items=owned_items)
+
 
 # Route to display items
 @app.route('/items', methods=['GET'])
@@ -35,6 +42,9 @@ def get_items():
     items = Item.query.all()
     items_list = [{'name': item.name, 'price': item.price, 'barcode': item.barcode, 'description': item.description} for item in items]
     return jsonify(items_list)
+
+# route to sell items
+
 
 '''
 ------> AUTH ROUTES <------
