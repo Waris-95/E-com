@@ -6,3 +6,4 @@ Flask-Bcrypt
 Flask-Login
 Flask-Mail
 gunicorn
+flask-wtf
