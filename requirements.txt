@@ -8,3 +8,4 @@ Flask-Mail
 gunicorn
 flask-wtf
 psycopg2-binary
+email_validator
