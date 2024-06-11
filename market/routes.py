@@ -28,7 +28,6 @@ def shop_page():
                 flash(f"Unfortunately, you don't have enough budget for {p_item_object.name}", category='danger')
         # After handling POST request, redirect to GET to show updated item list
         return redirect(url_for('shop_page'))
-    
     elif request.method == 'GET':
         items = Item.query.filter_by(owner=None).all()
         owned_items = Item.query.filter_by(owner=current_user.id).all()
