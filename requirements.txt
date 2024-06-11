@@ -7,3 +7,4 @@ Flask-Login
 Flask-Mail
 gunicorn
 flask-wtf
+psycopg2-binary
