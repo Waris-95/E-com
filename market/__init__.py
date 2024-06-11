@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 import os
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-from flask_mail import Mail, Message
 
 load_dotenv()
 
@@ -35,3 +34,9 @@ from market import routes  # Import here to avoid circular import
 # Register commands
 from market.seed import seed
 app.cli.add_command(seed)
+
+@app.before_first_request
+def set_schema():
+    schema = os.getenv('SCHEMA')
+    if schema:
+        db.engine.execute(f'SET search_path TO {schema};')
