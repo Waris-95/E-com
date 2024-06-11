@@ -56,7 +56,6 @@ def sell_item(item_id):
         flash('Item not found or you do not own this item.', 'danger')
     return redirect(url_for('shop_page'))
 
-
 '''
 ------> AUTH ROUTES <------
 '''
