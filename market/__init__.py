@@ -11,7 +11,12 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///market.db')
+
+if os.getenv('FLASK_ENV') == 'production':
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///market.db'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -31,7 +36,7 @@ def unauthorized(e):
 
 @app.before_request
 def set_schema():
-    if 'sqlite' not in app.config['SQLALCHEMY_DATABASE_URI']:
+    if os.getenv('FLASK_ENV') == 'production':
         schema = os.getenv('SCHEMA')
         if schema:
             with db.engine.connect() as connection:
