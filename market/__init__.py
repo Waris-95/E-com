@@ -12,7 +12,7 @@ load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
-# Use different database configurations for development and production
+# Database configuration for development and production
 if os.getenv('FLASK_ENV') == 'production':
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 else:
@@ -37,7 +37,7 @@ def unauthorized(e):
 
 @app.before_request
 def set_schema():
-    if os.getenv('FLASK_ENV') == 'production':
+    if 'sqlite' not in app.config['SQLALCHEMY_DATABASE_URI']:
         schema = os.getenv('SCHEMA')
         if schema:
             with db.engine.connect() as connection:
