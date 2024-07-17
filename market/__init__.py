@@ -1,3 +1,5 @@
+print("Initializing Flask application")
+
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -47,9 +49,8 @@ def set_schema():
 from market import routes
 
 # Register commands
-from market.seed import seed, undo_seed
+from market.seed import seed
 app.cli.add_command(seed)
-app.cli.add_command(undo_seed)
 
 if not app.debug:
     import logging
