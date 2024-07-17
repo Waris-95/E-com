@@ -1,3 +1,2 @@
-FLASK_APP=market.py
-FLASK_DEBUG = True
-FLASK_ENV=development
+FLASK_APP=market
+FLASK_ENV=production
