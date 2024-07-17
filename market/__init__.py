@@ -47,8 +47,9 @@ def set_schema():
 from market import routes
 
 # Register commands
-from market.seed import seed
+from market.seed import seed, undo_seed
 app.cli.add_command(seed)
+app.cli.add_command(undo_seed)
 
 if not app.debug:
     import logging
